@@ -1,23 +1,26 @@
 <h1>Tasks</h1>
 
-<table>
-  <tr>
-    <th>Id</th>
-    <th>Name</th>
-    <th>Completed</th>
-    <th colspan="3"></th>
-  </tr>
-
-<% @tasks.each do |task| %>
-  <tr>
-    <td><%= task.id %></td>
-    <td><%= task.name %></td>
-    <td><%= task.completed %></td>
-    <td><%= link_to 'Show', task %></td>
-    <td><%= link_to 'Edit', edit_task_path(task) %></td>
-    <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<table id="sort">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Completed</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.position %></td>
+        <td><%= task.name %></td>
+        <td><%= task.completed %></td>
+        <td><%= link_to 'Show', task %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />

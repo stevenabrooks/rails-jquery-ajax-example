@@ -80,4 +80,14 @@ class TasksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  #ajax sort method response
+  def sort
+    raise params.inspect
+    
+    respond_to do |format|
+      format.html { redirect_to tasks_url }
+      format.json { head :no_content }
+    end
+  end
 end

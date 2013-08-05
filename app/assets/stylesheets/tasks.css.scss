@@ -11,6 +11,10 @@ tr:nth-child(even) {
 	background: #efefef;
 }
 
+tr:nth-child(1) {
+	background: #E0FFFF;
+}
+
 th, td {
 	padding: 10px;
 	border-right: 1px solid #ccc;

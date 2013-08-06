@@ -90,9 +90,9 @@ class TasksController < ApplicationController
       task = Task.find_by_id(task[:task_id])
       task.position = index.to_i + 1
       task.save
-    end 
+    end
 
-    tasks = Task.order('position ASC')
+    tasks = Task.order('position ASC') #re-order
     render :json => tasks
 
   end

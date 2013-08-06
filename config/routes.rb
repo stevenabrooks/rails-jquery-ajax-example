@@ -6,8 +6,6 @@ RailsJqueryAjaxExample::Application.routes.draw do
 
   post "/tasks_sort" => "tasks#sort" #ajax post route
 
-  get "/tasks_display" => "tasks#display" #ajax get route
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

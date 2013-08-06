@@ -92,14 +92,9 @@ class TasksController < ApplicationController
       task.save
     end 
 
-    redirect_to tasks_url
-  end
-
-  #ajax get: display method
-  def display
     tasks = Task.order('position ASC')
-    render :json => tasks 
+    render :json => tasks
 
-    #redirect_to tasks_url
   end
+
 end

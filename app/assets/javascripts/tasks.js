@@ -8,11 +8,10 @@ $(function() {
 		return ui;
 	};
 
-	function success() {
-		$.get( '/tasks_display', function(data) {
+	function success(data) {
+		// $.get( '/tasks_display', function(data) {
 
 			console.log(data);
-			
 
 			$('tbody').empty();
 
@@ -20,7 +19,7 @@ $(function() {
 				$('tbody').append('<tr><td data-id="'+task.id+'" class="position">'+task.position+'</td><td>'+task.name+'</td><td>'+task.completed+'</td><td><a href="/tasks/'+task.id+'">show</a></td><td><a href="/tasks/'+task.id+'/edit">edit</a></td><td><a href="/tasks/'+task.id+'" data-confirm="Are you sure?" data-method="delete" rel="nofollow">destroy</a></td></tr>');
 			});
 
-		});
+		// });
 	}
 
 	$("#sort tbody").sortable({
@@ -39,7 +38,7 @@ $(function() {
 			console.log(tasks);
 			// [{"task_id":2},{"task_id":1},{"task_id":3}]
 
-			$.post( '/tasks_sort', {"tasks":tasks}, success()); //AJAX post the data.
+			$.post( '/tasks_sort', {"tasks":tasks}, function(data){success(data)}); //AJAX post the data.
 
 			// {"tasks":[{"task_id":2},{"task_id":1},{"task_id":3}]}
 		}

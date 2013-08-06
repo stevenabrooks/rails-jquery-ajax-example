@@ -84,19 +84,14 @@ class TasksController < ApplicationController
   #ajax sort method response
   def sort
     Rails.logger.info("PARAMS: #{params.inspect}")
-    # Parameters: {"{\"tasks\":"=>{"{\"object_id\":2},{\"object_id\":1},{\"object_id\":3}"=>{"}"=>nil}}}
+    # Parameters: {"tasks"=>{"0"=>{"task_id"=>"2"}, "1"=>{"task_id"=>"1"}, "2"=>{"task_id"=>"3"}}}
 
-    respond_to do |format|
-      format.json {
+    params[:tasks].each do |index, task|
+      t = Task.find_by_id(task[:task_id])
+      t.position = index.to_i + 1
+      t.save
+    end 
 
-        params['tasks'].each do |index, task|
-          t = Task.find_by_id(task.object_id)
-          t.position = index
-          t.save
-        end 
-
-        redirect_to tasks_url
-      }
-    end
+    redirect_to tasks_url 
   end
 end

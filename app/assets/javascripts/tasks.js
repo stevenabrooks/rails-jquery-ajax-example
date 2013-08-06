@@ -8,6 +8,21 @@ $(function() {
 		return ui;
 	};
 
+	function success() {
+		$.get( '/tasks_display', function(data) {
+
+			console.log(data);
+			
+
+			$('tbody').empty();
+
+			$(data).each(function(i, task) {	
+				$('tbody').append('<tr><td data-id="'+task.id+'" class="position">'+task.position+'</td><td>'+task.name+'</td><td>'+task.completed+'</td><td><a href="/tasks/'+task.id+'">show</a></td><td><a href="/tasks/'+task.id+'/edit">edit</a></td><td><a href="/tasks/'+task.id+'" data-confirm="Are you sure?" data-method="delete" rel="nofollow">destroy</a></td></tr>');
+			});
+
+		});
+	}
+
 	$("#sort tbody").sortable({
 		helper: fixHelper,
 
@@ -21,12 +36,12 @@ $(function() {
 				tasks.push({task_id: task_id}); //track new position by index in array.
 			});
 
-			// tasks = JSON.stringify(tasks); //format to JSON.
+			console.log(tasks);
+			// [{"task_id":2},{"task_id":1},{"task_id":3}]
 
-			console.log(tasks); //make sure we have client-side data in the correct format.
-			// {"tasks":[{"object_id":2},{"object_id":1},{"object_id":3}]}
-			
-			$.post( '/tasks_sort', {"tasks":tasks} ); //AJAX post the data.
+			$.post( '/tasks_sort', {"tasks":tasks}, success()); //AJAX post the data.
+
+			// {"tasks":[{"task_id":2},{"task_id":1},{"task_id":3}]}
 		}
 
 	}).disableSelection();

@@ -4,7 +4,9 @@ RailsJqueryAjaxExample::Application.routes.draw do
 
   resources :tasks
 
-  post "/tasks_sort" => "tasks#sort" #create a unique route for the ajax post location.
+  post "/tasks_sort" => "tasks#sort" #ajax post route
+
+  get "/tasks_display" => "tasks#display" #ajax get route
 
 
   # The priority is based upon order of creation:

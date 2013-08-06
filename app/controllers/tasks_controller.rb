@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.order('position ASC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -81,17 +81,25 @@ class TasksController < ApplicationController
     end
   end
 
-  #ajax sort method response
+  #ajax post: sort method
   def sort
     Rails.logger.info("PARAMS: #{params.inspect}")
-    # Parameters: {"tasks"=>{"0"=>{"task_id"=>"2"}, "1"=>{"task_id"=>"1"}, "2"=>{"task_id"=>"3"}}}
+    # {"tasks"=>{"0"=>{"task_id"=>"2"}, "1"=>{"task_id"=>"1"}, "2"=>{"task_id"=>"3"}}}
 
     params[:tasks].each do |index, task|
-      t = Task.find_by_id(task[:task_id])
-      t.position = index.to_i + 1
-      t.save
+      task = Task.find_by_id(task[:task_id])
+      task.position = index.to_i + 1
+      task.save
     end 
 
-    redirect_to tasks_url 
+    redirect_to tasks_url
+  end
+
+  #ajax get: display method
+  def display
+    tasks = Task.order('position ASC')
+    render :json => tasks 
+
+    #redirect_to tasks_url
   end
 end

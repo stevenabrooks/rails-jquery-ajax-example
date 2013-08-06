@@ -90,7 +90,6 @@ class TasksController < ApplicationController
       format.json {
 
         params['tasks'].each do |index, task|
-          raise task.inspect
           t = Task.find_by_id(task.object_id)
           t.position = index
           t.save
